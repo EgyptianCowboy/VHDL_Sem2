@@ -1,0 +1,11 @@
+* VHDL - Synchroon
+
+** Data Attributes
+#+BEGIN_SRC vhdl -n -r
+signal a : STD_LOGIC_VECTOR(7 downto 0);
+FOR i in a'range loop
+begin 
+  a<=b;
+  c<=a;
+end loop;
+#+END_SRC

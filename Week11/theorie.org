@@ -1,0 +1,26 @@
+* VHDL state machines
+Manier van programmeren. Met FSM, synchroon en zonder glitches.
+Verschillende types: Moore type en Mealy type.
+Twee processen: het synchrone proces en het combinatorische proces.
+
+#+BEGIN_SRC dot :file tryout.png
+  digraph {
+  // graph from left to right
+  rankdir=LR;
+  splines=true;
+  node [shape=ellipse];
+ 
+  id [label="Install Graphviz"]
+  conf [label="Configure org-babel"]
+  dot [label="DOT in org-mode"]
+ 
+  id -> conf
+  conf -> dot
+  dot -> "Profit"
+  dot -> "Success" [style=dotted]
+  }
+#+END_SRC
+
+#+RESULTS:
+[[file:tryout.png]]
+

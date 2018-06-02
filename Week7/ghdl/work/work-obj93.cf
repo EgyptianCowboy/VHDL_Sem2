@@ -1,0 +1,27 @@
+v 4
+file "/home/sil/Documents/School/VHDL/Week7/ghdl/" "opdr74.vhd" "115ae75ad57460bcb19ec6e770e9c2198350d842" "20180426143020.229":
+  entity opdr74 at 1( 0) + 0 on 4;
+  architecture behavioral of opdr74 at 18( 460) + 0 on 4;
+file "/home/sil/Documents/School/VHDL/Week7/ghdl/" "opdr74_tb.vhd" "a0aa817542d51bd455cad13240da681aae320cf7" "20180426143020.241":
+  entity opdr74_tb at 22( 863) + 0 on 4;
+  architecture behavorial of opdr74_tb at 33( 1113) + 0 on 4;
+  configuration opdr74_tb_behavorial_cfg at 85( 2305) + 0 on 4;
+file "/home/sil/Documents/School/VHDL/Week7/ghdl/" "opdr71.vhd" "47807532b1cb44cd70ec1bb0bed09449fdb7c650" "20180426143020.182":
+  entity opdr71 at 1( 0) + 0 on 4;
+  architecture behavioral of opdr71 at 19( 500) + 0 on 4;
+file "/home/sil/Documents/School/VHDL/Week7/ghdl/" "opdr71_tb.vhd" "dcec7258119a2197887bfcc54ac5d9cd15c449d2" "20180426143020.189":
+  entity opdr71_tb at 1( 0) + 0 on 4;
+  architecture behavorial of opdr71_tb at 7( 80) + 0 on 4;
+file "/home/sil/Documents/School/VHDL/Week7/ghdl/" "opdr72.vhd" "ca158b4de021d291c17743e33df0ee9ca0070135" "20180426143020.196":
+  entity opdr72 at 1( 0) + 0 on 4;
+  architecture behavioral of opdr72 at 20( 507) + 0 on 4;
+file "/home/sil/Documents/School/VHDL/Week7/ghdl/" "opdr72_tb.vhd" "4920f204191aa6054826af817feb9837102be800" "20180426143020.204":
+  entity opdr72_tb at 1( 0) + 0 on 4;
+  architecture behavorial of opdr72_tb at 7( 80) + 0 on 4;
+file "/home/sil/Documents/School/VHDL/Week7/ghdl/" "opdr73.vhd" "011e699aee92ca9e8dc658cb41e725ca82586450" "20180426143020.210":
+  entity opdr73 at 1( 0) + 0 on 4;
+  architecture behavioral of opdr73 at 11( 219) + 0 on 4;
+file "/home/sil/Documents/School/VHDL/Week7/ghdl/" "opdr73_tb.vhd" "a53bf1736996b1cb3bad2f0e0feb7736b3dfeb55" "20180426143020.222":
+  entity opdr73_tb at 22( 863) + 0 on 4;
+  architecture behavorial of opdr73_tb at 34( 1139) + 0 on 4;
+  configuration opdr73_tb_behavorial_cfg at 94( 2425) + 0 on 4;

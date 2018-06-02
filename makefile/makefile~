@@ -1,0 +1,13 @@
+CC= ghdl
+GFLAGS= --ieee=synopsys --warn-no-vital-generic
+FILE= test
+WAVEVIEW= gtkwave
+STOP_TIME = 100ns
+GHDL_SIM_STOP= --stop-time=$(STOP_TIME)
+
+.PHONY: clean
+
+all: clean make run view
+
+compile:
+	$(CC) -a $(GFLAGS) --workdir=simulation --work=work $(FILE).vhd

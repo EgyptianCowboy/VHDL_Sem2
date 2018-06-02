@@ -1,0 +1,52 @@
+* Parallel versus sequentieel
+Vanaf pagina 88.
+
+Bij sequentiële logica volgen instructies elkaar één na één op, er is dus geheugen
+aanwezig, er is een klok nodig etc. Er moet ook rekening gehouden worden met
+uitgangen van vorige instructies.
+
+** Multiplexer
+Gebruik maken van conditional instructions.
+- When else
+Syntax: 
+#+BEGIN_SRC vhdl -n -r
+<target> <= <expression> when <condition> else
+            <expression> when <condition> else
+            ...
+            <expression> when <condition> else
+#+END_SRC
+Altijd zorgen er een "gesloten" situatie bij de laatste else, zo voorkom je
+onverwacht gedrag.
+
+** Encoders en decoders
+Bij klassieke componenten:
+- Encoders: meer inputs dan outputs
+- Decoders: minder inputs dan outputs
+Bij VHDL worden de ingangen en uitgangen opgeslaan in lookup tables (LUT).
+Hier zijn het aantal ingangen en uitgangen irrelevant.
+
+*** Prioriteitsencoder
+Prioriteitsencoders worden vaak gebruikt bij ISR (interrupt service routine).
+Via de prioriteitsencoder wordt een interruptprioriteitslijst opgesteld.
+
+Bij een prioriteitsencoder te schrijven moet er rekening gehouden worden met
+de volgorde van het gelijkstellen van <target> aan <expression>.
+
+** Selected signal assignment statements
+Syntax: 
+#+BEGIN_SRC vhdl -n -r
+with (<condition>) select
+<target> <= <expression> when <choices>,
+            <expression> when <choices>,
+            ...
+            <expression> when <choices>,
+            <expression> when others;
+#+END_SRC
+Dit kan ook gebruikt worden met ranges: 
+#+BEGIN_SRC vhdl -n -r
+with (<condition>) select
+<target> <= <expression> when <selection1> | <selection2> | <selection3> | ...,
+            ...
+            <expression> when others;
+#+END_SRC
+ 

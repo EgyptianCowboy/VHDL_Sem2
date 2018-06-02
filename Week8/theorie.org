@@ -1,0 +1,27 @@
+* Les 18/04/2018
+Verder gaan met processen.
+Als er meerdere processen zijn worden ze parallel uitgevoerd.
+
+Uitgangen mogen maar in één proces gebrukt worden. Want dan is de uitgang onbepaald als twee processen tegelijk worden uitgevoerd.
+Intern worden processen sequentieel uitgevoerd, dus kan de uitgang twee keer worden toegekent.
+
+Toekenning van waarden gebeuren op het einde van het proces.
+bijvoorbeeld:
+#+BEGIN_SRC vhdl -n -r
+process(b)
+begin 
+  a<=b;
+  c<=a;
+end process;
+#+END_SRC
+Hier krijgt a de waarde van b en c krijgt de waarde van de 'oude' a.
+
+** Sequentiële logica
+Er zijn geheugenfuncties.
+Bij if-then-else functies is er geheugen nodig.
+*** Signalen vs variabelen
+Signalen worden gedefinieerd tussen architecture en begin, deze zijn dus globaal.
+Variabelen worden gedeclareerd tussen process en begin, deze zijn dus altijd lokaal, nooit globaal.
+Bij variabelen wordt de toekenning met ':=' gedaan, ':=' gebeurt onmiddelijk. '<=' gebeurt op het einde van een process.
+(Latch niveau gestuurd en flip-flop flank gestuurd).
+

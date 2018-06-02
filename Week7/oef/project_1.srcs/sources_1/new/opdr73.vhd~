@@ -1,0 +1,51 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;
+
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx leaf cells in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+
+entity opdr73 is
+  Port ( numIn : in std_logic_vector(3 downto 0);
+         sel : in std_logic;
+         numOut : out std_logic_vector(3 downto 0) );
+end opdr73;
+
+architecture Behavioral of opdr73 is
+
+begin
+
+comparator: process(numIn(1 downto 0),numIn(3 downto 2))
+begin
+if sel = '0' then
+if numIn(1 downto 0) = numIn(3 downto 2) then 
+  numOut <= "0001";
+elsif numIn(1 downto 0) < numIn(3 downto 2) then
+  numOut <= "0010";
+elsif numIn(1 downto 0) > numIn(3 downto 2) then
+  numOut <= "0100"; 
+else numOut <= "0000";
+end if;
+end if;
+end process;  
+
+binenc: process(numIn)
+begin
+if sel = '1' then
+if numIn < 2 then
+  numOut <= numIn + 2;
+elsif numIn >= 2 AND numIn < 7 then
+  numOut <= numIn - 1;
+elsif numIn >= 7 AND numIn <= 9 then
+  numOut <= numIn - 2;
+end if;
+end if;
+end process;
+
+end Behavioral;

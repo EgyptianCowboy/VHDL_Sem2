@@ -1,0 +1,23 @@
+* VHDL 16/05/2018
+In elke state wordt de output aangestuurd en wordt de volgende state bepaald.
+
+** Moore
+De uitgang wordt meteen aangestuurd, zonder voorwaarden.
+
+** Mealy
+De uitgang wordt aangestuurd met een voorwaarde, altijd een input.
+
+** Hybride
+Beide Moore en Mealy uitgangen.
+
+** One Hot Encoding
+De synthesizer kiest de state variabele, dit zou sneller zijn
+
+#+BEGIN_SRC vhdl
+-- One hot encoding
+type state_type is (ST0, ST1 ST2, ST3);
+attribute ENUM_ENCODING: STRING;
+attribute ENUM_ENCODING of state_type: type is "1000 0100 0010 0001";
+signal PS,NS : state_type;
+#+END_SRC
+Enumeration is toch beter te gebruiken.

@@ -1,0 +1,85 @@
+#-----------------------------------------------------------
+# Vivado v2017.4 (64-bit)
+# SW Build 2086221 on Fri Dec 15 20:54:30 MST 2017
+# IP Build 2085800 on Fri Dec 15 22:25:07 MST 2017
+# Start of session at: Tue May  8 09:55:15 2018
+# Process ID: 3391
+# Current directory: /home/sil/Documents/School/VHDL/Week10/oef/opdr10
+# Command line: vivado
+# Log file: /home/sil/Documents/School/VHDL/Week10/oef/opdr10/vivado.log
+# Journal file: /home/sil/Documents/School/VHDL/Week10/oef/opdr10/vivado.jou
+#-----------------------------------------------------------
+start_gui
+create_project opdr10 . -part xc7z007sclg225-1
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/opt/Xilinx/Vivado/2017.4/data/ip'.
+create_project: Time (s): cpu = 00:00:12 ; elapsed = 00:00:05 . Memory (MB): peak = 6089.586 ; gain = 48.031 ; free physical = 1062 ; free virtual = 6171
+set_property board_part em.avnet.com:minized:part0:1.2 [current_project]
+set_property target_language VHDL [current_project]
+add_files -norecurse {/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr102.vhd /home/sil/Documents/School/VHDL/Week10/oef/opdr10/vhdlnoclk.vhd}
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+set_property SOURCE_SET sources_1 [get_filesets sim_1]
+add_files -fileset sim_1 -norecurse /home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr102_tb.vhd
+update_compile_order -fileset sim_1
+update_compile_order -fileset sim_1
+launch_runs synth_1 -jobs 2
+[Tue May  8 10:02:05 2018] Launched synth_1...
+Run output will be captured here: /home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.runs/synth_1/runme.log
+update_compile_order -fileset sources_1
+reset_run synth_1
+launch_runs synth_1 -jobs 2
+[Tue May  8 10:10:08 2018] Launched synth_1...
+Run output will be captured here: /home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.runs/synth_1/runme.log
+reset_run synth_1
+launch_runs synth_1 -jobs 2
+[Tue May  8 10:12:04 2018] Launched synth_1...
+Run output will be captured here: /home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.runs/synth_1/runme.log
+reset_run synth_1
+launch_runs synth_1 -jobs 2
+[Tue May  8 10:12:09 2018] Launched synth_1...
+Run output will be captured here: /home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.runs/synth_1/runme.log
+export_ip_user_files -of_objects  [get_files /home/sil/Documents/School/VHDL/Week10/oef/opdr10/vhdlnoclk.vhd] -no_script -reset -force -quiet
+remove_files  /home/sil/Documents/School/VHDL/Week10/oef/opdr10/vhdlnoclk.vhd
+set_property SOURCE_SET sources_1 [get_filesets sim_1]
+add_files -fileset sim_1 -norecurse /home/sil/Documents/School/VHDL/Week10/oef/opdr10/vhdlnoclk.vhd
+update_compile_order -fileset sim_1
+reset_run synth_1
+launch_runs synth_1 -jobs 2
+[Tue May  8 10:15:35 2018] Launched synth_1...
+Run output will be captured here: /home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.runs/synth_1/runme.log
+reset_run synth_1
+launch_runs synth_1 -jobs 2
+[Tue May  8 10:16:04 2018] Launched synth_1...
+Run output will be captured here: /home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.runs/synth_1/runme.log
+add_files -fileset constrs_1 -norecurse /home/sil/Documents/School/VHDL/Week10/oef/opdr10/Minized_Template.xdc
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 2
+[Tue May  8 10:19:46 2018] Launched synth_1...
+Run output will be captured here: /home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.runs/synth_1/runme.log
+[Tue May  8 10:19:46 2018] Launched impl_1...
+Run output will be captured here: /home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.runs/impl_1/runme.log
+add_files -norecurse /home/sil/Documents/School/VHDL/Week10/oef/opdr10/vhdlnoclk.vhd
+update_compile_order -fileset sources_1
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 2
+[Tue May  8 10:22:56 2018] Launched synth_1...
+Run output will be captured here: /home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.runs/synth_1/runme.log
+[Tue May  8 10:22:57 2018] Launched impl_1...
+Run output will be captured here: /home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.runs/impl_1/runme.log
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 2
+[Tue May  8 10:28:54 2018] Launched synth_1...
+Run output will be captured here: /home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.runs/synth_1/runme.log
+[Tue May  8 10:28:54 2018] Launched impl_1...
+Run output will be captured here: /home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.runs/impl_1/runme.log
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 2
+[Tue May  8 10:33:56 2018] Launched synth_1...
+Run output will be captured here: /home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.runs/synth_1/runme.log
+[Tue May  8 10:33:56 2018] Launched impl_1...
+Run output will be captured here: /home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.runs/impl_1/runme.log
+reset_run impl_1 -prev_step 
+exit
+INFO: [Common 17-206] Exiting Vivado at Tue May  8 10:36:46 2018...

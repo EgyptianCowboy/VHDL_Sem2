@@ -1,0 +1,38 @@
+* VHDL
+Eerst library definiëren
+Entity beschrijven
+Voor logic: IEEE.std _ logic _ 1164.all
+Numeriek: IEEE.
+vb: 
+  entity oef1 is
+    port (DIM: in STD _ LOGIC;
+          port _ name : signal _ mode signal _ type;
+          ...);
+  end oef1
+
+signal _ mode: in of output
+signal _ type: std _ logic, numeric, vector etc.
+
+Architecture geven
+vb:
+  architecture Behavorial of oef1 is
+  (declaration)
+  begin
+  (code)
+  end Behavorial;
+
+Behavorial kan variëren, kan eigen naam aan geven.
+Bij declaration kunnen signalen gedefinieerd worden, dit zijn verbindingen tussen "blokjes".
+
+Dan: 
+- Synthetiseren
+- Netlist opstellen
+- Converteren van software naar hardware
+
+(--) is commentaar
+
+<= is geen gelijkheidsteken, maar een concurrent signal assignment statement (CSA) = toekenningsoperator. Het wordt enkel 
+uitgevoerd als de poorten/variabelen veranderen.
+
+** Stap 2: programma testen met een testbench
+

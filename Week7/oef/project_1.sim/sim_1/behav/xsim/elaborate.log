@@ -1,0 +1,16 @@
+Vivado Simulator 2017.4
+Copyright 1986-1999, 2001-2016 Xilinx, Inc. All Rights Reserved.
+Running: /opt/Xilinx/Vivado/2017.4/bin/unwrapped/lnx64.o/xelab -wto 1721a90cff9c47e7a21e07c8083b3f58 --incr --debug typical --relax --mt 8 -L xil_defaultlib -L secureip --snapshot opdr74_tb_behavorial_cfg_behav xil_defaultlib.opdr74_tb_behavorial_cfg -log elaborate.log 
+Using 8 slave threads.
+Starting static elaboration
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.numeric_std
+Compiling architecture behavioral of entity xil_defaultlib.opdr74 [opdr74_default]
+Compiling architecture behavorial of entity xil_defaultlib.opdr74_tb [opdr74_tb]
+Built simulation snapshot opdr74_tb_behavorial_cfg_behav

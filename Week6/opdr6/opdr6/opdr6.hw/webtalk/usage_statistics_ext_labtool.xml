@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<webTalkData  fileName='usage_statistics_ext_labtool.xml'  majorVersion='1' minorVersion='0' timeStamp='Fri Mar 23 15:31:55 2018'>
+<section name="__ROOT__" level="0" order="1" description="">
+ <section name="software_version_and_target_device" level="1" order="1" description="">
+  <keyValuePair key="beta" value="FALSE" description="" />
+  <keyValuePair key="build_version" value="2086221" description="" />
+  <keyValuePair key="date_generated" value="Fri Mar 23 15:31:54 2018" description="" />
+  <keyValuePair key="os_platform" value="LIN64" description="" />
+  <keyValuePair key="product_version" value="Vivado v2017.4 (64-bit)" description="" />
+  <keyValuePair key="project_id" value="138ed049-f381-47b6-832c-2804b80c37fb" description="" />
+  <keyValuePair key="project_iteration" value="1" description="" />
+  <keyValuePair key="random_id" value="7ab32ce6-1311-40ae-a66f-617a814ebac2" description="" />
+  <keyValuePair key="registration_id" value="7ab32ce6-1311-40ae-a66f-617a814ebac2" description="" />
+  <keyValuePair key="route_design" value="FALSE" description="" />
+  <keyValuePair key="target_device" value="not_applicable" description="" />
+  <keyValuePair key="target_family" value="not_applicable" description="" />
+  <keyValuePair key="target_package" value="not_applicable" description="" />
+  <keyValuePair key="target_speed" value="not_applicable" description="" />
+  <keyValuePair key="tool_flow" value="labtool" description="" />
+ </section>
+ <section name="user_environment" level="1" order="2" description="">
+  <keyValuePair key="cpu_name" value="Intel(R) Core(TM) i5-2540M CPU @ 2.60GHz" description="" />
+  <keyValuePair key="cpu_speed" value="3099.877 MHz" description="" />
+  <keyValuePair key="os_name" value="Debian" description="" />
+  <keyValuePair key="os_release" value="Debian GNU/Linux 9.4 (stretch)" description="" />
+  <keyValuePair key="system_ram" value="4.000 GB" description="" />
+  <keyValuePair key="total_processors" value="1" description="" />
+ </section>
+ <section name="labtool" level="1" order="3" description="">
+  <section name="usage" level="2" order="1" description="">
+   <keyValuePair key="cable" value="Xilinx-oj1A/MiniZed V1-oj1A/15000000:" description="" />
+   <keyValuePair key="chain" value="0000400013723093" description="" />
+   <keyValuePair key="pgmcnt" value="01:00:00" description="" />
+  </section>
+ </section>
+ <section name="vivado_usage" level="1" order="4" description="">
+ </section>
+</section>
+</webTalkData>

@@ -1,0 +1,88 @@
+% Created 2018-05-28 Mon 19:38
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{sectsty}
+\usepackage{libertine}
+\usepackage[T1]{fontenc}
+\setlength\parindent{0pt}
+\author{sil}
+\date{\today}
+\title{Clock, counter/freq divider and FSM}
+\hypersetup{
+ pdfauthor={sil},
+ pdftitle={Clock, counter/freq divider and FSM},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 25.1.1 (Org mode 9.1.13)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+
+\section{Clock}
+\label{sec:orgd38e61b}
+
+
+\section{Counter/Frequency divider}
+\label{sec:org1de05c8}
+
+
+\subsection{50\% DT}
+\label{sec:orgfc807d8}
+Counter upper limit: 
+
+\begin{verbatim}
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity clkDiv is
+  port (
+    clk     : in  std_logic;
+    rst     : in  std_logic;            -- 5 MHz clock
+    clk_out : out std_logic);
+end entity clkDiv;
+
+architecture behavorial of clkDiv is
+  signal cnt : integer   := 1;
+  signal tmp : std_logic := '0';
+begin  -- architecture behavorial
+
+  -- purpose: divide the clock
+  -- type   : sequential
+  -- inputs : clk, rst
+  -- outputs: clk_out
+  process (clk, rst) is
+  begin  -- process
+    if rst = '0' then                   -- asynchronous reset (active low)
+      cnt <= 1;
+      tmp <= '0';
+    elsif clk'event and clk = '1' then  -- rising clock edge
+      cnt <= cnt + 1;
+      if (cnt = 2500000) then
+        tmp <= not(tmp);
+        cnt <= 1;
+      end if;
+    end if;
+    clk_out <= tmp;
+  end process;
+
+end architecture behavorial;
+\end{verbatim}
+
+\section{FSM}
+\label{sec:org2fa099a}
+\end{document}

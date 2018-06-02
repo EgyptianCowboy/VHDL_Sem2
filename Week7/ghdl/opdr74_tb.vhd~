@@ -1,0 +1,415 @@
+-------------------------------------------------------------------------------
+-- Title      : Testbench for design "opdr74"
+-- Project    :
+-------------------------------------------------------------------------------
+-- File       : opdr74_tb.vhd
+-- Author     : sil  <sil@x220.telenet.be>
+-- Company    :
+-- Created    : 2018-04-26
+-- Last update: 2018-04-26
+-- Platform   :
+-- Standard   : VHDL'93/02
+-------------------------------------------------------------------------------
+-- Description:
+-------------------------------------------------------------------------------
+-- Copyright (c) 2018
+-------------------------------------------------------------------------------
+-- Revisions  :
+-- Date        Version  Author  Description
+-- 2018-04-26  1.0      sil Created
+-------------------------------------------------------------------------------
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+-------------------------------------------------------------------------------
+
+entity opdr74_tb is
+
+end entity opdr74_tb;
+
+-------------------------------------------------------------------------------
+
+architecture behavorial of opdr74_tb is
+
+  -- component ports
+  signal tBTemp    : std_logic;
+  signal tOTemp    : std_logic;
+  signal tWBoiler  : std_logic;
+  signal tMaxKetel : std_logic;
+  signal tKetel    : std_logic;
+  signal schBPomp  : std_logic;
+  signal schOPomp  : std_logic;
+  signal pOnder    : std_logic;
+  signal pBoven    : std_logic;
+  signal pBoiler   : std_logic;
+  signal brKetel   : std_logic;
+
+  -- clock
+  signal Clk : std_logic := '1';
+
+begin  -- architecture behavorial
+
+  -- component instantiation
+  DUT : entity work.opdr74
+    port map (
+      tBTemp    => tBTemp,
+      tOTemp    => tOTemp,
+      tWBoiler  => tWBoiler,
+      tMaxKetel => tMaxKetel,
+      tKetel    => tKetel,
+      schBPomp  => schBPomp,
+      schOPomp  => schOPomp,
+      pOnder    => pOnder,
+      pBoven    => pBoven,
+      pBoiler   => pBoiler,
+      brKetel   => brKetel);
+
+  process
+  begin
+    tBTemp <= '0';
+    tOTemp <= '0';
+    tWBoiler <= '0';
+    tMaxKetel <= '0';
+    tKetel <= '0';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '1';
+    tOTemp <= '0';
+    tWBoiler <= '0';
+    tMaxKetel <= '0';
+    tKetel <= '0';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '0';
+    tOTemp <= '1';
+    tWBoiler <= '0';
+    tMaxKetel <= '0';
+    tKetel <= '0';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '1';
+    tOTemp <= '1';
+    tWBoiler <= '0';
+    tMaxKetel <= '0';
+    tKetel <= '0';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '0';
+    tOTemp <= '0';
+    tWBoiler <= '1';
+    tMaxKetel <= '0';
+    tKetel <= '0';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '1';
+    tOTemp <= '0';
+    tWBoiler <= '1';
+    tMaxKetel <= '0';
+    tKetel <= '0';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '0';
+    tOTemp <= '1';
+    tWBoiler <= '1';
+    tMaxKetel <= '0';
+    tKetel <= '0';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '1';
+    tOTemp <= '1';
+    tWBoiler <= '1';
+    tMaxKetel <= '0';
+    tKetel <= '0';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '0';
+    tOTemp <= '0';
+    tWBoiler <= '0';
+    tMaxKetel <= '1';
+    tKetel <= '0';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '1';
+    tOTemp <= '0';
+    tWBoiler <= '0';
+    tMaxKetel <= '1';
+    tKetel <= '0';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '0';
+    tOTemp <= '1';
+    tWBoiler <= '0';
+    tMaxKetel <= '1';
+    tKetel <= '0';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '1';
+    tOTemp <= '1';
+    tWBoiler <= '0';
+    tMaxKetel <= '1';
+    tKetel <= '0';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '0';
+    tOTemp <= '0';
+    tWBoiler <= '1';
+    tMaxKetel <= '1';
+    tKetel <= '0';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '1';
+    tOTemp <= '0';
+    tWBoiler <= '1';
+    tMaxKetel <= '1';
+    tKetel <= '0';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '0';
+    tOTemp <= '1';
+    tWBoiler <= '1';
+    tMaxKetel <= '1';
+    tKetel <= '0';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '1';
+    tOTemp <= '1';
+    tWBoiler <= '1';
+    tMaxKetel <= '1';
+    tKetel <= '0';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '0';
+    tOTemp <= '0';
+    tWBoiler <= '0';
+    tMaxKetel <= '1';
+    tKetel <= '0';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '1';
+    tOTemp <= '0';
+    tWBoiler <= '0';
+    tMaxKetel <= '1';
+    tKetel <= '0';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '0';
+    tOTemp <= '1';
+    tWBoiler <= '0';
+    tMaxKetel <= '1';
+    tKetel <= '0';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '1';
+    tOTemp <= '1';
+    tWBoiler <= '0';
+    tMaxKetel <= '1';
+    tKetel <= '0';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '0';
+    tOTemp <= '0';
+    tWBoiler <= '1';
+    tMaxKetel <= '1';
+    tKetel <= '0';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '1';
+    tOTemp <= '0';
+    tWBoiler <= '1';
+    tMaxKetel <= '1';
+    tKetel <= '0';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '0';
+    tOTemp <= '1';
+    tWBoiler <= '1';
+    tMaxKetel <= '1';
+    tKetel <= '0';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '1';
+    tOTemp <= '1';
+    tWBoiler <= '1';
+    tMaxKetel <= '1';
+    tKetel <= '0';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '0';
+    tOTemp <= '0';
+    tWBoiler <= '0';
+    tMaxKetel <= '0';
+    tKetel <= '1';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '1';
+    tOTemp <= '0';
+    tWBoiler <= '0';
+    tMaxKetel <= '0';
+    tKetel <= '1';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '0';
+    tOTemp <= '1';
+    tWBoiler <= '0';
+    tMaxKetel <= '0';
+    tKetel <= '1';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '1';
+    tOTemp <= '1';
+    tWBoiler <= '0';
+    tMaxKetel <= '0';
+    tKetel <= '1';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '0';
+    tOTemp <= '0';
+    tWBoiler <= '1';
+    tMaxKetel <= '0';
+    tKetel <= '1';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '1';
+    tOTemp <= '0';
+    tWBoiler <= '1';
+    tMaxKetel <= '0';
+    tKetel <= '1';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '0';
+    tOTemp <= '1';
+    tWBoiler <= '1';
+    tMaxKetel <= '0';
+    tKetel <= '1';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '1';
+    tOTemp <= '1';
+    tWBoiler <= '1';
+    tMaxKetel <= '0';
+    tKetel <= '1';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '0';
+    tOTemp <= '0';
+    tWBoiler <= '0';
+    tMaxKetel <= '1';
+    tKetel <= '1';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '1';
+    tOTemp <= '0';
+    tWBoiler <= '0';
+    tMaxKetel <= '1';
+    tKetel <= '1';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '0';
+    tOTemp <= '1';
+    tWBoiler <= '0';
+    tMaxKetel <= '1';
+    tKetel <= '1';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '1';
+    tOTemp <= '1';
+    tWBoiler <= '0';
+    tMaxKetel <= '1';
+    tKetel <= '1';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '0';
+    tOTemp <= '0';
+    tWBoiler <= '1';
+    tMaxKetel <= '1';
+    tKetel <= '1';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '1';
+    tOTemp <= '0';
+    tWBoiler <= '1';
+    tMaxKetel <= '1';
+    tKetel <= '1';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '0';
+    tOTemp <= '1';
+    tWBoiler <= '1';
+    tMaxKetel <= '1';
+    tKetel <= '1';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+    tBTemp <= '1';
+    tOTemp <= '1';
+    tWBoiler <= '1';
+    tMaxKetel <= '1';
+    tKetel <= '1';
+    schBPomp <= '0';
+    schOPomp <= '0';
+    wait for 10 ns;
+
+    wait;
+  end process;
+    -- clock generation
+    --Clk <= not Clk after 10 ns;
+
+    -- waveform generation
+    --WaveGen_Proc: process
+    --begin
+    -- insert signal assignments here
+
+    --  wait until Clk = '1';
+    --end process WaveGen_Proc;
+
+
+
+  end architecture behavorial;
+
+-------------------------------------------------------------------------------
+
+  configuration opdr74_tb_behavorial_cfg of opdr74_tb is
+      for behavorial
+        end for;
+  end opdr74_tb_behavorial_cfg;
+
+-------------------------------------------------------------------------------

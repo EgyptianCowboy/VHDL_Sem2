@@ -1,0 +1,24 @@
+* Les 28/03/2018
+Geen combinatorische logica meer, maar sequentiële logica. Want combinatorische logica is gelimiteerd.
+Gebruik maken van geheugen etc. -> behavorial style architecture in plaats van data-flow style architecture.
+
+** Geheugenblokken schrijven
+Gebruik maken van processen.
+
+Processen worden parallel uitgevoerd, maar er is altijd een sensitivity list aanwezig per proces.
+Process syntax:
+#+BEGIN_SRC vhdl -n -r
+<my_label>: process(<sensitivity_list>) is
+<item_declaration>
+begin
+    <sequential_statements>
+end process <my_label>;
+#+END_SRC
+De conditions in de sensitivity zijn signalen, deze moeten met een komma gescheiden zijn. 
+Als deze signalen veranderen wordt het proces uitgevoerd.
+Als er geen sensitivity list is wordt het process continu uitgevoerd.
+
+In een proces kan code worden geschreven die sequentieel wordt uitgevoerd. In een proces kunnen if en case gebruikt worden.
+
+*** D-flipflop met VHDL
+Zie sheets.

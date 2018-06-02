@@ -1,0 +1,26 @@
+* 02/05/2018
+
+** Frequentiedelers/vermenigvuldigers
+
+Zorgen dat de periode klopt, eisen aan de duty cycle.
+
+Voorbeeld van een frequentiedeler, zie sheets voor meer voorbeelden.
+#+BEGIN_SRC vhdl
+  -- purpose: Divide the frequency
+  -- type   : sequential
+  -- inputs : CLK
+  -- outputs: pulse
+  freqDiv : process (CLK) is
+    variable count : std_logic_vector(24 downto 0);
+  begin  -- process freqDiv
+    if CLK'event and CLK = '1' then       -- rising clock edge
+      count := count + '1';
+    end if;
+    if count = "1011111010111100001000000" then
+      pulse <= '1';
+      count := "0000000000000000000000000";
+    else
+      pulse <= '0';
+    end if;
+  end process freqDiv;
+#+END_SRC

@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2017.4 (64-bit)
+# SW Build 2086221 on Fri Dec 15 20:54:30 MST 2017
+# IP Build 2085800 on Fri Dec 15 22:25:07 MST 2017
+# Start of session at: Fri Mar 16 15:46:35 2018
+# Process ID: 22772
+# Current directory: /home/sil/Documents/School/VHDL/Week4/oef/opdr5/opdr5.runs/impl_2
+# Command line: vivado -log opdr5_5.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source opdr5_5.tcl -notrace
+# Log file: /home/sil/Documents/School/VHDL/Week4/oef/opdr5/opdr5.runs/impl_2/opdr5_5.vdi
+# Journal file: /home/sil/Documents/School/VHDL/Week4/oef/opdr5/opdr5.runs/impl_2/vivado.jou
+#-----------------------------------------------------------
+source opdr5_5.tcl -notrace

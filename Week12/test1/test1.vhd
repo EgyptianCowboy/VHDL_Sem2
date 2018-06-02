@@ -1,0 +1,19 @@
+library ieee;
+use ieee.numeric_std.all;
+use ieee.std_logic_1164.all;
+
+entity testFSM is
+  port (
+    reset   : in  std_logic;
+    in1     : in  std_logic;
+    in2     : in  std_logic;
+    out1    : out std_logic;
+    outVect : out std_logic_vector(3 downto 0));
+end entity testFSM;
+
+architecture behavorial of testFSM is
+
+begin  -- architecture behavorial
+
+
+end architecture behavorial;

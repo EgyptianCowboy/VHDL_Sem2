@@ -1,0 +1,25 @@
+* VHDL les: 23/05/2018
+** Modelleren
+Meerdere VHDL-programma's samenvoegen.
+
+Port maps: 
+
+#+BEGIN_SRC vhdl
+component COUNTER
+  port (CLK, RESET: in Std_logic;
+        UpDown: in Std_logic := '0';   -- 
+default value
+        Q: out Std_logic_vector(3 downto 0));
+end component;
+
+-- Positional association...
+G1: COUNTER port map (Clk32MHz, RST, open, Count);
+
+-- Named association (order doesn't matter)...
+G2: COUNTER port map (  RESET => RST,
+                        CLK => Clk32MHz,
+                        Q(3) => Q2MHz,
+                        Q(2) => open,  -- unconnected
+                        Q(1 downto 0) => Cnt2,
+                        UpDown => open);
+#+END_SRC

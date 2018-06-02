@@ -1,0 +1,240 @@
+#+TITLE: Clock, counter/freq divider and FSM
+#+OPTIONS: html-postamble:nil toc:nil num:nil
+#+HTML_HEAD_EXTRA: <style>pre { font-size: 13px; background-color: #000; color: #bbb; }</style>
+
+* Clock
+Implementing a software clock on the minized.
+
+Put the file in the same directory and define the component and port map it.
+
+#+BEGIN_SRC vhdl
+  library ieee;
+  use ieee.numeric_std.all;
+  use ieee.std_logic_1164.all;
+
+  entity opdr102 is
+    port (
+      clkotest : out std_logic);
+  end entity opdr102;
+
+
+  architecture behavorial of opdr102 is
+
+    component vhdlnoclk                   -- Define the clock component
+      port (clkout : out std_logic);
+    end component;
+  begin  -- architecture behavorial
+    U0 : vhdlnoclk
+      port map(clkout => clkotest);       -- map the output clock to the clock
+                                          -- of the fpga
+
+  end architecture behavorial;
+
+#+END_SRC
+ 
+* Counter/Frequency divider
+
+
+** 50% DT
+Counter upper limit: $cnt_{max} = \frac{f_{clk}}{2 \cdot f_{des}}$
+
+#+BEGIN_SRC vhdl
+  library ieee;
+  use ieee.std_logic_1164.all;
+  use ieee.numeric_std.all;
+
+  entity clkDiv is                        -- Target frequency is 1 Hz
+    port (
+      clk     : in  std_logic;
+      rst     : in  std_logic;            -- 5 MHz clock
+      clk_out : out std_logic);
+  end entity clkDiv;
+
+  architecture behavorial of clkDiv is
+    signal cnt : integer range 1 to 2500000 := 1;
+    signal tmp : std_logic                  := '0';
+  begin  -- architecture behavorial
+
+    -- purpose: divide the clock
+    -- type   : sequential
+    -- inputs : clk, rst
+    -- outputs: clk_out
+    process (clk, rst) is
+    begin  -- process
+      if rst = '0' then                   -- asynchronous reset (active low)
+        cnt <= 1;
+        tmp <= '0';
+      elsif clk'event and clk = '1' then  -- rising clock edge
+        cnt <= cnt + 1;
+        if (cnt = 2500000) then
+          tmp <= not(tmp);
+          cnt <= 1;
+        end if;
+      end if;
+      clk_out <= tmp;
+    end process;
+
+  end architecture behavorial;
+#+END_SRC
+
+** Variable DT
+Upper count limit: $cnt_{max} = \frac{f_{clk}}{f_{des}} \cdot DT_{\%}$.
+
+#+BEGIN_SRC vhdl
+  library ieee;
+  use ieee.std_logic_1164.all;
+  use ieee.numeric_std.all;
+
+  entity clkDiv is                        -- Target frequency is 100 Hz at 60% DT
+    port (
+      clk     : in  std_logic;
+      rst     : in  std_logic;            -- 5 MHz clock
+      clk_out : out std_logic);
+  end entity clkDiv;
+
+  architecture behavorial of clkDiv is
+    signal cnt : integer range 1 to 50000 := 1;  -- Let counter count to full
+                                                   -- clock this time
+    signal tmp : std_logic                  := '0';
+  begin  -- architecture behavorial
+
+    -- purpose: divide the clock
+    -- type   : sequential
+    -- inputs : clk, rst
+    -- outputs: clk_out
+    process (clk, rst) is
+    begin  -- process
+      if rst = '0' then                   -- asynchronous reset (active low)
+        cnt <= 1;
+        tmp <= '0';
+      elsif clk'event and clk = '1' then  -- rising clock edge
+        cnt <= cnt + 1;
+        if(cnt = 30000 or cnt = 1) then
+          tmp <= not(tmp);
+        end if;
+      end if;
+      clk_out <= tmp;
+    end process;
+
+  end architecture behavorial;
+#+END_SRC
+
+* FSM
+Start by defining the custom type "state" or "state_type".
+
+Then define two signals of the type "state" or "state_type".
+
+The FSM has two processes, one combinational and one sequential.
+
+The sequential process changes the present or current state on every clock cycle en defines the reset.
+
+The combinatorial defines the states.
+
+#+BEGIN_SRC vhdl
+  library IEEE;
+  use IEEE.STD_LOGIC_1164.all;
+  use ieee.numeric_std.all;
+
+  entity opdr1118 is
+    port (
+      clk : in  std_logic;                -- input clock
+      rst : in  std_logic;                -- asynchronous reset
+      X   : in  std_logic;                -- input signal
+      Z1  : out std_logic;                -- output 1
+      Z2  : out std_logic);               -- output 2
+  end opdr1118;
+
+  architecture Behavioral of opdr1118 is
+    type state is (A, B, C, D, E, F, G, H);
+    signal ps, ns : state;
+  begin
+    -- purpose: go to next state on clock pulse
+    -- type   : sequential
+    -- inputs : clk, rst, NS
+    -- outputs:
+    sync_nxt : process (clk, rst) is
+    begin  -- process sync_nxt
+      if rst = '0' then                   -- asynchronous reset (active low)
+        ps <= A;
+      elsif clk'event and clk = '1' then  -- rising clock edge
+        ps <= ns;
+      end if;
+    end process sync_nxt;
+
+    -- purpose: Describe the state machine
+    -- type   : combinational
+    -- inputs : X, PS
+    -- outputs: Z1, Z2
+    comb_pr : process (X, ps) is
+    begin  -- process comb_pr
+      case ps is
+        when A =>
+          Z1 <= '0';
+          Z2 <= '0';
+          if X = '1' then
+            ns <= B;
+          else
+            ns <= A;
+          end if;
+        when B =>
+          Z1 <= '0';
+          Z2 <= '0';
+          if X = '1' then
+            ns <= C;
+          else
+            ns <= B;
+          end if;
+        when C =>
+          Z1 <= '0';
+          Z2 <= '0';
+          if X = '1' then
+            ns <= D;
+          else
+            ns <= C;
+          end if;
+        when D =>
+          Z1 <= '1';
+          Z2 <= '0';
+          if X = '1' then
+            ns <= E;
+          else
+            ns <= D;
+          end if;
+        when E =>
+          Z1 <= '0';
+          Z2 <= '1';
+          if X = '1' then
+            ns <= F;
+          else
+            ns <= A;
+          end if;
+        when F =>
+          Z1 <= '1';
+          Z2 <= '1';
+          if X = '1' then
+            ns <= G;
+          else
+            ns <= F;
+          end if;
+        when G =>
+          Z1 <= '1';
+          Z2 <= '1';
+          if X = '1' then
+            ns <= H;
+          else
+            ns <= G;
+          end if;
+        when H =>
+          Z1 <= '1';
+          Z2 <= '1';
+          if X = '1' then
+            ns <= A;
+          else
+            ns <= H;
+          end if;
+        when others => ns <= A;
+      end case;
+    end process comb_pr;
+  end Behavioral;
+
+#+END_SRC

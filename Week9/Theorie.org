@@ -1,0 +1,46 @@
+* VHDL - Synchroon
+
+** Data Attributes
+#+BEGIN_SRC vhdl -n -r
+signal a : STD_LOGIC_VECTOR(7 downto 0);
+FOR i in a'range loop
+begin 
+  a<=b;
+  c<=a;
+end loop;
+#+END_SRC
+** Synchrone logica met VHDL
+Alles gebeurt op een klokflank (opgaand of neergaand).
+Combinatorische logica reageert op elke verandering op de ingang, dus als er ongewenste pieken zijn verandert de uitgang. 
+Met synchrone logica zijn hier minder problemen mee omdat de uitgang enkel kan veranderen op klokflanken.
+
+Let op logische hazards, propagation delay.
+
+Synchrone processes doen enkel iets op de flank van de klok, niet enkel als de klok hoog is of verandert.
+
+#+BEGIN_SRC vhdl -n -r
+if(clk'event and clk='1')
+if(rising_edge(clk))
+#+END_SRC
+Deze twee condities doen beide exact hetzelfde.
+
+De "wait until" conditie mag maar één keer in het programma voorkomen en op de eerste regel van het process.
+
+In een process mag maar één rising_edge gebruikt worden.
+Oplossing:
+#+BEGIN_SRC vhdl -n -r
+process(clk1,clk2)
+begin
+delayClk1<=clk1;
+delayClk2<=clk2;
+if clk1='1' and delayClk1='0' then
+  q1 <= a;
+end if;
+if clk2='1' and delayClk2='0' then
+  q2 <= b;
+end if;
+end process;
+#+END_SRC
+Geen vergelijking maken met rising_edge(clk). Geen toekenningen bij genegeerde flankvoorwaarden.
+
+Nooit asynchrone en synchrone methodieken mengen.

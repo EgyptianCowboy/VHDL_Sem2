@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2018-05-29 Tue 09:54 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Clock, counter/freq divider and FSM</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="sil" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<style>pre { font-size: 13px; background-color: #000; color: #bbb; }</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Clock, counter/freq divider and FSM</h1>
+
+<div id="outline-container-orgcd51c57" class="outline-2">
+<h2 id="orgcd51c57">Clock</h2>
+<div class="outline-text-2" id="text-orgcd51c57">
+<p>
+Implementing a software clock on the minized.
+</p>
+
+<p>
+Put the file in the same directory and define the component and port map it.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-vhdl"><span style="color: #fb2874;">library</span> <span style="color: #ff83fa;">ieee</span>;
+<span style="color: #fb2874;">use</span> <span style="color: #ff83fa;">ieee</span>.<span style="color: #ff83fa;">numeric_std</span>.<span style="color: #fb2874;">all</span>;
+<span style="color: #fb2874;">use</span> <span style="color: #ff83fa;">ieee</span>.<span style="color: #ff83fa;">std_logic_1164</span>.<span style="color: #fb2874;">all</span>;
+
+<span style="color: #fb2874;">entity</span> <span style="color: #b6e63e;">opdr102</span> <span style="color: #fb2874;">is</span>
+  <span style="color: #fb2874;">port</span> <span style="color: #fb2874;">(</span>
+    <span style="color: #fd971f;">clkotest</span> : <span style="color: #fb2874;">out</span> <span style="color: #66d9ef;">std_logic</span><span style="color: #fb2874;">)</span>;
+<span style="color: #fb2874;">end</span> <span style="color: #fb2874;">entity</span> <span style="color: #b6e63e;">opdr102</span>;
+
+
+<span style="color: #fb2874;">architecture</span> <span style="color: #b6e63e;">behavorial</span> <span style="color: #fb2874;">of</span> <span style="color: #b6e63e;">opdr102</span> <span style="color: #fb2874;">is</span>
+
+  <span style="color: #fb2874;">component</span> <span style="color: #b6e63e;">vhdlnoclk</span>                   <span style="color: #555556;">-- </span><span style="color: #555556;">Define the clock component</span>
+    <span style="color: #fb2874;">port</span> <span style="color: #fb2874;">(</span><span style="color: #fd971f;">clkout</span> : <span style="color: #fb2874;">out</span> <span style="color: #66d9ef;">std_logic</span><span style="color: #fb2874;">)</span>;
+  <span style="color: #fb2874;">end</span> <span style="color: #fb2874;">component</span>;
+<span style="color: #fb2874;">begin</span>  <span style="color: #555556;">-- </span><span style="color: #555556;">architecture behavorial</span>
+  <span style="color: #b6e63e;">U0</span> : <span style="color: #b6e63e;">vhdlnoclk</span>
+    <span style="color: #fb2874;">port</span> <span style="color: #fb2874;">map</span><span style="color: #fb2874;">(</span><span style="color: #fd971f;">clkout</span> =&gt; clkotest<span style="color: #fb2874;">)</span>;       <span style="color: #555556;">-- </span><span style="color: #555556;">map the output clock to the clock</span>
+                                        <span style="color: #555556;">-- </span><span style="color: #555556;">of the fpga</span>
+
+<span style="color: #fb2874;">end</span> <span style="color: #fb2874;">architecture</span> <span style="color: #b6e63e;">behavorial</span>;
+
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5c22327" class="outline-2">
+<h2 id="org5c22327">Counter/Frequency divider</h2>
+<div class="outline-text-2" id="text-org5c22327">
+</div>
+<div id="outline-container-orgc1c3d7e" class="outline-3">
+<h3 id="orgc1c3d7e">50% DT</h3>
+<div class="outline-text-3" id="text-orgc1c3d7e">
+<p>
+Counter upper limit: \(cnt_{max} = \frac{f_{clk}}{2 \cdot f_{des}}\)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-vhdl"><span style="color: #fb2874;">library</span> <span style="color: #ff83fa;">ieee</span>;
+<span style="color: #fb2874;">use</span> <span style="color: #ff83fa;">ieee</span>.<span style="color: #ff83fa;">std_logic_1164</span>.<span style="color: #fb2874;">all</span>;
+<span style="color: #fb2874;">use</span> <span style="color: #ff83fa;">ieee</span>.<span style="color: #ff83fa;">numeric_std</span>.<span style="color: #fb2874;">all</span>;
+
+<span style="color: #fb2874;">entity</span> <span style="color: #b6e63e;">clkDiv</span> <span style="color: #fb2874;">is</span>                        <span style="color: #555556;">-- </span><span style="color: #555556;">Target frequency is 1 Hz</span>
+  <span style="color: #fb2874;">port</span> <span style="color: #fb2874;">(</span>
+    <span style="color: #fd971f;">clk</span>     : <span style="color: #fb2874;">in</span>  <span style="color: #66d9ef;">std_logic</span>;
+    <span style="color: #fd971f;">rst</span>     : <span style="color: #fb2874;">in</span>  <span style="color: #66d9ef;">std_logic</span>;            <span style="color: #555556;">-- </span><span style="color: #555556;">5 MHz clock</span>
+    <span style="color: #fd971f;">clk_out</span> : <span style="color: #fb2874;">out</span> <span style="color: #66d9ef;">std_logic</span><span style="color: #fb2874;">)</span>;
+<span style="color: #fb2874;">end</span> <span style="color: #fb2874;">entity</span> <span style="color: #b6e63e;">clkDiv</span>;
+
+<span style="color: #fb2874;">architecture</span> <span style="color: #b6e63e;">behavorial</span> <span style="color: #fb2874;">of</span> <span style="color: #b6e63e;">clkDiv</span> <span style="color: #fb2874;">is</span>
+  <span style="color: #fb2874;">signal</span> <span style="color: #fd971f;">cnt</span> : <span style="color: #66d9ef;">integer</span> <span style="color: #fb2874;">range</span> 1 <span style="color: #fb2874;">to</span> 2500000 := 1;
+  <span style="color: #fb2874;">signal</span> <span style="color: #fd971f;">tmp</span> : <span style="color: #66d9ef;">std_logic</span>                  := <span style="color: #e2c770;">'0'</span>;
+<span style="color: #fb2874;">begin</span>  <span style="color: #555556;">-- </span><span style="color: #555556;">architecture behavorial</span>
+
+  <span style="color: #555556;">-- </span><span style="color: #555556;">purpose: divide the clock</span>
+  <span style="color: #555556;">-- </span><span style="color: #555556;">type   : sequential</span>
+  <span style="color: #555556;">-- </span><span style="color: #555556;">inputs : clk, rst</span>
+  <span style="color: #555556;">-- </span><span style="color: #555556;">outputs: clk_out</span>
+  <span style="color: #fb2874;">process</span> <span style="color: #fb2874;">(</span>clk, rst<span style="color: #fb2874;">)</span> <span style="color: #fb2874;">is</span>
+  <span style="color: #fb2874;">begin</span>  <span style="color: #555556;">-- </span><span style="color: #555556;">process</span>
+    <span style="color: #fb2874;">if</span> rst = <span style="color: #e2c770;">'0'</span> <span style="color: #fb2874;">then</span>                   <span style="color: #555556;">-- </span><span style="color: #555556;">asynchronous reset (active low)</span>
+      cnt &lt;= 1;
+      tmp &lt;= <span style="color: #e2c770;">'0'</span>;
+    <span style="color: #fb2874;">elsif</span> clk'<span style="color: #b0c4de;">event</span> <span style="color: #fb2874;">and</span> clk = <span style="color: #e2c770;">'1'</span> <span style="color: #fb2874;">then</span>  <span style="color: #555556;">-- </span><span style="color: #555556;">rising clock edge</span>
+      cnt &lt;= cnt + 1;
+      <span style="color: #fb2874;">if</span> <span style="color: #fb2874;">(</span>cnt = 2500000<span style="color: #fb2874;">)</span> <span style="color: #fb2874;">then</span>
+        tmp &lt;= <span style="color: #fb2874;">not</span><span style="color: #fb2874;">(</span>tmp<span style="color: #fb2874;">)</span>;
+        cnt &lt;= 1;
+      <span style="color: #fb2874;">end</span> <span style="color: #fb2874;">if</span>;
+    <span style="color: #fb2874;">end</span> <span style="color: #fb2874;">if</span>;
+    clk_out &lt;= tmp;
+  <span style="color: #fb2874;">end</span> <span style="color: #fb2874;">process</span>;
+
+<span style="color: #fb2874;">end</span> <span style="color: #fb2874;">architecture</span> <span style="color: #b6e63e;">behavorial</span>;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd9b3b06" class="outline-3">
+<h3 id="orgd9b3b06">Variable DT</h3>
+<div class="outline-text-3" id="text-orgd9b3b06">
+<p>
+Upper count limit: \(cnt_{max} = \frac{f_{clk}}{f_{des}} \cdot DT_{\%}\).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-vhdl"><span style="color: #fb2874;">library</span> <span style="color: #ff83fa;">ieee</span>;
+<span style="color: #fb2874;">use</span> <span style="color: #ff83fa;">ieee</span>.<span style="color: #ff83fa;">std_logic_1164</span>.<span style="color: #fb2874;">all</span>;
+<span style="color: #fb2874;">use</span> <span style="color: #ff83fa;">ieee</span>.<span style="color: #ff83fa;">numeric_std</span>.<span style="color: #fb2874;">all</span>;
+
+<span style="color: #fb2874;">entity</span> <span style="color: #b6e63e;">clkDiv</span> <span style="color: #fb2874;">is</span>                        <span style="color: #555556;">-- </span><span style="color: #555556;">Target frequency is 100 Hz at 60% DT</span>
+  <span style="color: #fb2874;">port</span> <span style="color: #fb2874;">(</span>
+    <span style="color: #fd971f;">clk</span>     : <span style="color: #fb2874;">in</span>  <span style="color: #66d9ef;">std_logic</span>;
+    <span style="color: #fd971f;">rst</span>     : <span style="color: #fb2874;">in</span>  <span style="color: #66d9ef;">std_logic</span>;            <span style="color: #555556;">-- </span><span style="color: #555556;">5 MHz clock</span>
+    <span style="color: #fd971f;">clk_out</span> : <span style="color: #fb2874;">out</span> <span style="color: #66d9ef;">std_logic</span><span style="color: #fb2874;">)</span>;
+<span style="color: #fb2874;">end</span> <span style="color: #fb2874;">entity</span> <span style="color: #b6e63e;">clkDiv</span>;
+
+<span style="color: #fb2874;">architecture</span> <span style="color: #b6e63e;">behavorial</span> <span style="color: #fb2874;">of</span> <span style="color: #b6e63e;">clkDiv</span> <span style="color: #fb2874;">is</span>
+  <span style="color: #fb2874;">signal</span> <span style="color: #fd971f;">cnt</span> : <span style="color: #66d9ef;">integer</span> <span style="color: #fb2874;">range</span> 1 <span style="color: #fb2874;">to</span> 50000 := 1;  <span style="color: #555556;">-- </span><span style="color: #555556;">Let counter count to full</span>
+                                                 <span style="color: #555556;">-- </span><span style="color: #555556;">clock this time</span>
+  <span style="color: #fb2874;">signal</span> <span style="color: #fd971f;">tmp</span> : <span style="color: #66d9ef;">std_logic</span>                  := <span style="color: #e2c770;">'0'</span>;
+<span style="color: #fb2874;">begin</span>  <span style="color: #555556;">-- </span><span style="color: #555556;">architecture behavorial</span>
+
+  <span style="color: #555556;">-- </span><span style="color: #555556;">purpose: divide the clock</span>
+  <span style="color: #555556;">-- </span><span style="color: #555556;">type   : sequential</span>
+  <span style="color: #555556;">-- </span><span style="color: #555556;">inputs : clk, rst</span>
+  <span style="color: #555556;">-- </span><span style="color: #555556;">outputs: clk_out</span>
+  <span style="color: #fb2874;">process</span> <span style="color: #fb2874;">(</span>clk, rst<span style="color: #fb2874;">)</span> <span style="color: #fb2874;">is</span>
+  <span style="color: #fb2874;">begin</span>  <span style="color: #555556;">-- </span><span style="color: #555556;">process</span>
+    <span style="color: #fb2874;">if</span> rst = <span style="color: #e2c770;">'0'</span> <span style="color: #fb2874;">then</span>                   <span style="color: #555556;">-- </span><span style="color: #555556;">asynchronous reset (active low)</span>
+      cnt &lt;= 1;
+      tmp &lt;= <span style="color: #e2c770;">'0'</span>;
+    <span style="color: #fb2874;">elsif</span> clk'<span style="color: #b0c4de;">event</span> <span style="color: #fb2874;">and</span> clk = <span style="color: #e2c770;">'1'</span> <span style="color: #fb2874;">then</span>  <span style="color: #555556;">-- </span><span style="color: #555556;">rising clock edge</span>
+      cnt &lt;= cnt + 1;
+      <span style="color: #fb2874;">if</span><span style="color: #fb2874;">(</span>cnt = 30000 <span style="color: #fb2874;">or</span> cnt = 1<span style="color: #fb2874;">)</span> <span style="color: #fb2874;">then</span>
+        tmp &lt;= <span style="color: #fb2874;">not</span><span style="color: #fb2874;">(</span>tmp<span style="color: #fb2874;">)</span>;
+      <span style="color: #fb2874;">end</span> <span style="color: #fb2874;">if</span>;
+    <span style="color: #fb2874;">end</span> <span style="color: #fb2874;">if</span>;
+    clk_out &lt;= tmp;
+  <span style="color: #fb2874;">end</span> <span style="color: #fb2874;">process</span>;
+
+<span style="color: #fb2874;">end</span> <span style="color: #fb2874;">architecture</span> <span style="color: #b6e63e;">behavorial</span>;
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org9e4c5b2" class="outline-2">
+<h2 id="org9e4c5b2">FSM</h2>
+<div class="outline-text-2" id="text-org9e4c5b2">
+<p>
+Start by defining the custom type "state" or "state<sub>type</sub>".
+</p>
+
+<p>
+Then define two signals of the type "state" or "state<sub>type</sub>".
+</p>
+
+<p>
+The FSM has two processes, one combinational and one sequential.
+</p>
+
+<p>
+The sequential process changes the present or current state on every clock cycle en defines the reset.
+</p>
+
+<p>
+The combinatorial defines the states.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-vhdl"><span style="color: #fb2874;">library</span> <span style="color: #ff83fa;">IEEE</span>;
+<span style="color: #fb2874;">use</span> <span style="color: #ff83fa;">IEEE</span>.<span style="color: #ff83fa;">STD_LOGIC_1164</span>.<span style="color: #fb2874;">all</span>;
+<span style="color: #fb2874;">use</span> <span style="color: #ff83fa;">ieee</span>.<span style="color: #ff83fa;">numeric_std</span>.<span style="color: #fb2874;">all</span>;
+
+<span style="color: #fb2874;">entity</span> <span style="color: #b6e63e;">opdr1118</span> <span style="color: #fb2874;">is</span>
+  <span style="color: #fb2874;">port</span> <span style="color: #fb2874;">(</span>
+    <span style="color: #fd971f;">clk</span> : <span style="color: #fb2874;">in</span>  <span style="color: #66d9ef;">std_logic</span>;                <span style="color: #555556;">-- </span><span style="color: #555556;">input clock</span>
+    <span style="color: #fd971f;">rst</span> : <span style="color: #fb2874;">in</span>  <span style="color: #66d9ef;">std_logic</span>;                <span style="color: #555556;">-- </span><span style="color: #555556;">asynchronous reset</span>
+    <span style="color: #fd971f;">X</span>   : <span style="color: #fb2874;">in</span>  <span style="color: #66d9ef;">std_logic</span>;                <span style="color: #555556;">-- </span><span style="color: #555556;">input signal</span>
+    <span style="color: #fd971f;">Z1</span>  : <span style="color: #fb2874;">out</span> <span style="color: #66d9ef;">std_logic</span>;                <span style="color: #555556;">-- </span><span style="color: #555556;">output 1</span>
+    <span style="color: #fd971f;">Z2</span>  : <span style="color: #fb2874;">out</span> <span style="color: #66d9ef;">std_logic</span><span style="color: #fb2874;">)</span>;               <span style="color: #555556;">-- </span><span style="color: #555556;">output 2</span>
+<span style="color: #fb2874;">end</span> <span style="color: #b6e63e;">opdr1118</span>;
+
+<span style="color: #fb2874;">architecture</span> <span style="color: #b6e63e;">Behavioral</span> <span style="color: #fb2874;">of</span> <span style="color: #b6e63e;">opdr1118</span> <span style="color: #fb2874;">is</span>
+  <span style="color: #fb2874;">type</span> <span style="color: #66d9ef;">state</span> <span style="color: #fb2874;">is</span> <span style="color: #fb2874;">(</span>A, B, C, D, E, F, G, H<span style="color: #fb2874;">)</span>;
+  <span style="color: #fb2874;">signal</span> <span style="color: #deb887;">ps</span>, <span style="color: #deb887;">ns</span> : state;
+<span style="color: #fb2874;">begin</span>
+  <span style="color: #555556;">-- </span><span style="color: #555556;">purpose: go to next state on clock pulse</span>
+  <span style="color: #555556;">-- </span><span style="color: #555556;">type   : sequential</span>
+  <span style="color: #555556;">-- </span><span style="color: #555556;">inputs : clk, rst, NS</span>
+  <span style="color: #555556;">-- </span><span style="color: #555556;">outputs:</span>
+  <span style="color: #b6e63e;">sync_nxt</span> : <span style="color: #fb2874;">process</span> <span style="color: #fb2874;">(</span>clk, rst<span style="color: #fb2874;">)</span> <span style="color: #fb2874;">is</span>
+  <span style="color: #fb2874;">begin</span>  <span style="color: #555556;">-- </span><span style="color: #555556;">process sync_nxt</span>
+    <span style="color: #fb2874;">if</span> rst = <span style="color: #e2c770;">'0'</span> <span style="color: #fb2874;">then</span>                   <span style="color: #555556;">-- </span><span style="color: #555556;">asynchronous reset (active low)</span>
+      <span style="color: #deb887;">ps</span> &lt;= A;
+    <span style="color: #fb2874;">elsif</span> clk'<span style="color: #b0c4de;">event</span> <span style="color: #fb2874;">and</span> clk = <span style="color: #e2c770;">'1'</span> <span style="color: #fb2874;">then</span>  <span style="color: #555556;">-- </span><span style="color: #555556;">rising clock edge</span>
+      <span style="color: #deb887;">ps</span> &lt;= <span style="color: #deb887;">ns</span>;
+    <span style="color: #fb2874;">end</span> <span style="color: #fb2874;">if</span>;
+  <span style="color: #fb2874;">end</span> <span style="color: #fb2874;">process</span> <span style="color: #b6e63e;">sync_nxt</span>;
+
+  <span style="color: #555556;">-- </span><span style="color: #555556;">purpose: Describe the state machine</span>
+  <span style="color: #555556;">-- </span><span style="color: #555556;">type   : combinational</span>
+  <span style="color: #555556;">-- </span><span style="color: #555556;">inputs : X, PS</span>
+  <span style="color: #555556;">-- </span><span style="color: #555556;">outputs: Z1, Z2</span>
+  <span style="color: #b6e63e;">comb_pr</span> : <span style="color: #fb2874;">process</span> <span style="color: #fb2874;">(</span>X, <span style="color: #deb887;">ps</span><span style="color: #fb2874;">)</span> <span style="color: #fb2874;">is</span>
+  <span style="color: #fb2874;">begin</span>  <span style="color: #555556;">-- </span><span style="color: #555556;">process comb_pr</span>
+    <span style="color: #fb2874;">case</span> <span style="color: #deb887;">ps</span> <span style="color: #fb2874;">is</span>
+      <span style="color: #fb2874;">when</span> A =&gt;
+        Z1 &lt;= <span style="color: #e2c770;">'0'</span>;
+        Z2 &lt;= <span style="color: #e2c770;">'0'</span>;
+        <span style="color: #fb2874;">if</span> X = <span style="color: #e2c770;">'1'</span> <span style="color: #fb2874;">then</span>
+          <span style="color: #deb887;">ns</span> &lt;= B;
+        <span style="color: #fb2874;">else</span>
+          <span style="color: #deb887;">ns</span> &lt;= A;
+        <span style="color: #fb2874;">end</span> <span style="color: #fb2874;">if</span>;
+      <span style="color: #fb2874;">when</span> B =&gt;
+        Z1 &lt;= <span style="color: #e2c770;">'0'</span>;
+        Z2 &lt;= <span style="color: #e2c770;">'0'</span>;
+        <span style="color: #fb2874;">if</span> X = <span style="color: #e2c770;">'1'</span> <span style="color: #fb2874;">then</span>
+          <span style="color: #deb887;">ns</span> &lt;= C;
+        <span style="color: #fb2874;">else</span>
+          <span style="color: #deb887;">ns</span> &lt;= B;
+        <span style="color: #fb2874;">end</span> <span style="color: #fb2874;">if</span>;
+      <span style="color: #fb2874;">when</span> C =&gt;
+        Z1 &lt;= <span style="color: #e2c770;">'0'</span>;
+        Z2 &lt;= <span style="color: #e2c770;">'0'</span>;
+        <span style="color: #fb2874;">if</span> X = <span style="color: #e2c770;">'1'</span> <span style="color: #fb2874;">then</span>
+          <span style="color: #deb887;">ns</span> &lt;= D;
+        <span style="color: #fb2874;">else</span>
+          <span style="color: #deb887;">ns</span> &lt;= C;
+        <span style="color: #fb2874;">end</span> <span style="color: #fb2874;">if</span>;
+      <span style="color: #fb2874;">when</span> D =&gt;
+        Z1 &lt;= <span style="color: #e2c770;">'1'</span>;
+        Z2 &lt;= <span style="color: #e2c770;">'0'</span>;
+        <span style="color: #fb2874;">if</span> X = <span style="color: #e2c770;">'1'</span> <span style="color: #fb2874;">then</span>
+          <span style="color: #deb887;">ns</span> &lt;= E;
+        <span style="color: #fb2874;">else</span>
+          <span style="color: #deb887;">ns</span> &lt;= D;
+        <span style="color: #fb2874;">end</span> <span style="color: #fb2874;">if</span>;
+      <span style="color: #fb2874;">when</span> E =&gt;
+        Z1 &lt;= <span style="color: #e2c770;">'0'</span>;
+        Z2 &lt;= <span style="color: #e2c770;">'1'</span>;
+        <span style="color: #fb2874;">if</span> X = <span style="color: #e2c770;">'1'</span> <span style="color: #fb2874;">then</span>
+          <span style="color: #deb887;">ns</span> &lt;= F;
+        <span style="color: #fb2874;">else</span>
+          <span style="color: #deb887;">ns</span> &lt;= A;
+        <span style="color: #fb2874;">end</span> <span style="color: #fb2874;">if</span>;
+      <span style="color: #fb2874;">when</span> F =&gt;
+        Z1 &lt;= <span style="color: #e2c770;">'1'</span>;
+        Z2 &lt;= <span style="color: #e2c770;">'1'</span>;
+        <span style="color: #fb2874;">if</span> X = <span style="color: #e2c770;">'1'</span> <span style="color: #fb2874;">then</span>
+          <span style="color: #deb887;">ns</span> &lt;= G;
+        <span style="color: #fb2874;">else</span>
+          <span style="color: #deb887;">ns</span> &lt;= F;
+        <span style="color: #fb2874;">end</span> <span style="color: #fb2874;">if</span>;
+      <span style="color: #fb2874;">when</span> G =&gt;
+        Z1 &lt;= <span style="color: #e2c770;">'1'</span>;
+        Z2 &lt;= <span style="color: #e2c770;">'1'</span>;
+        <span style="color: #fb2874;">if</span> X = <span style="color: #e2c770;">'1'</span> <span style="color: #fb2874;">then</span>
+          <span style="color: #deb887;">ns</span> &lt;= H;
+        <span style="color: #fb2874;">else</span>
+          <span style="color: #deb887;">ns</span> &lt;= G;
+        <span style="color: #fb2874;">end</span> <span style="color: #fb2874;">if</span>;
+      <span style="color: #fb2874;">when</span> H =&gt;
+        Z1 &lt;= <span style="color: #e2c770;">'1'</span>;
+        Z2 &lt;= <span style="color: #e2c770;">'1'</span>;
+        <span style="color: #fb2874;">if</span> X = <span style="color: #e2c770;">'1'</span> <span style="color: #fb2874;">then</span>
+          <span style="color: #deb887;">ns</span> &lt;= A;
+        <span style="color: #fb2874;">else</span>
+          <span style="color: #deb887;">ns</span> &lt;= H;
+        <span style="color: #fb2874;">end</span> <span style="color: #fb2874;">if</span>;
+      <span style="color: #fb2874;">when</span> <span style="color: #fb2874;">others</span> =&gt; <span style="color: #deb887;">ns</span> &lt;= A;
+    <span style="color: #fb2874;">end</span> <span style="color: #fb2874;">case</span>;
+  <span style="color: #fb2874;">end</span> <span style="color: #fb2874;">process</span> <span style="color: #b6e63e;">comb_pr</span>;
+<span style="color: #fb2874;">end</span> <span style="color: #b6e63e;">Behavioral</span>;
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

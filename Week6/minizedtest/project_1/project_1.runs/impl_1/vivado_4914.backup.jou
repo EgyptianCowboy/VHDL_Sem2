@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2017.4 (64-bit)
+# SW Build 2086221 on Fri Dec 15 20:54:30 MST 2017
+# IP Build 2085800 on Fri Dec 15 22:25:07 MST 2017
+# Start of session at: Thu Mar 22 19:13:59 2018
+# Process ID: 4914
+# Current directory: /home/sil/Documents/School/VHDL/Week6/minizedtest/project_1/project_1.runs/impl_1
+# Command line: vivado -log opdr5_7.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source opdr5_7.tcl -notrace
+# Log file: /home/sil/Documents/School/VHDL/Week6/minizedtest/project_1/project_1.runs/impl_1/opdr5_7.vdi
+# Journal file: /home/sil/Documents/School/VHDL/Week6/minizedtest/project_1/project_1.runs/impl_1/vivado.jou
+#-----------------------------------------------------------
+source opdr5_7.tcl -notrace

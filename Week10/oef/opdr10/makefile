@@ -1,0 +1,13 @@
+CC = ghdl
+PROG = opd102.vcd
+DEPS = opdr102.vhd opdr102_tb.vhd
+MAIN = opdr102.vhd
+TB = opdr102_tb
+WAVE = gtkwave
+
+$(PROG): $(DEPS)
+	$(CC) -s *.vhd
+	$(CC) -a *.vhd
+	$(CC) -e $(TB)
+	$(CC) -r $(TB) --vcd=$(PROG)
+	$(WAVE) $(PROG) &

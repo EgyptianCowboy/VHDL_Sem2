@@ -1,0 +1,64 @@
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity opdr103
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/sil/Documents/School/VHDL/Week10/oef/opdr10/vhdlnoclk.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity vhdlnoclk
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity opdr103_tb
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity opdr103_tb
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity opdr103_tb
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity opdr103_tb
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity opdr103_tb
+ERROR: [VRFC 10-719] formal port/generic <clk> is not declared in <opdr103> [/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103_tb.vhd:51]
+ERROR: [VRFC 10-1504] unit behavorial ignored due to previous errors [/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103_tb.vhd:33]
+ERROR: [VRFC 10-317] architecture behavorial not found in entity opdr103_tb [/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103_tb.vhd:77]
+ERROR: [VRFC 10-1504] unit opdr103_tb_behavorial_cfg ignored due to previous errors [/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103_tb.vhd:76]
+INFO: [VRFC 10-240] VHDL file /home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103_tb.vhd ignored due to errors
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity opdr103_tb
+ERROR: [VRFC 10-719] formal port/generic <clk> is not declared in <opdr103> [/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103_tb.vhd:51]
+ERROR: [VRFC 10-1504] unit behavorial ignored due to previous errors [/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103_tb.vhd:33]
+ERROR: [VRFC 10-317] architecture behavorial not found in entity opdr103_tb [/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103_tb.vhd:77]
+ERROR: [VRFC 10-1504] unit opdr103_tb_behavorial_cfg ignored due to previous errors [/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103_tb.vhd:76]
+INFO: [VRFC 10-240] VHDL file /home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103_tb.vhd ignored due to errors
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity opdr103
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity opdr103_tb
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity opdr103_tb
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity opdr103
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity opdr103_tb
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr102.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity opdr102
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr102_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity opdr102_tb
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity opdr103_tb
+ERROR: [VRFC 10-1412] syntax error near wait [/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103_tb.vhd:55]
+ERROR: [VRFC 10-1471] type error near ns ; current type time; expected type  void [/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103_tb.vhd:55]
+ERROR: [VRFC 10-1504] unit behavorial ignored due to previous errors [/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103_tb.vhd:33]
+ERROR: [VRFC 10-317] architecture behavorial not found in entity opdr103_tb [/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103_tb.vhd:71]
+ERROR: [VRFC 10-1504] unit opdr103_tb_behavorial_cfg ignored due to previous errors [/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103_tb.vhd:70]
+INFO: [VRFC 10-240] VHDL file /home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103_tb.vhd ignored due to errors
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity opdr103_tb
+ERROR: [VRFC 10-1412] syntax error near wait [/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103_tb.vhd:55]
+ERROR: [VRFC 10-1471] type error near ns ; current type time; expected type  void [/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103_tb.vhd:55]
+ERROR: [VRFC 10-1504] unit behavorial ignored due to previous errors [/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103_tb.vhd:33]
+ERROR: [VRFC 10-317] architecture behavorial not found in entity opdr103_tb [/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103_tb.vhd:71]
+ERROR: [VRFC 10-1504] unit opdr103_tb_behavorial_cfg ignored due to previous errors [/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103_tb.vhd:70]
+INFO: [VRFC 10-240] VHDL file /home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103_tb.vhd ignored due to errors
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity opdr103_tb
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity opdr103_tb
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity opdr103
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/sil/Documents/School/VHDL/Week10/oef/opdr10/opdr10.srcs/sources_1/new/opdr103_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity opdr103_tb

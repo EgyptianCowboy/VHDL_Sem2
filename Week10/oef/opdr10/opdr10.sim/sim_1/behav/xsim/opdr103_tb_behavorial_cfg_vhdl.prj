@@ -1,0 +1,7 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../opdr10.srcs/sources_1/new/opdr103.vhd" \
+"../../../../opdr10.srcs/sources_1/new/opdr103_tb.vhd" \
+
+# Do not sort compile order
+nosort
