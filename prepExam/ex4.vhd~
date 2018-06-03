@@ -1,0 +1,21 @@
+library ieee;
+use ieee.numeric_std.all;
+use ieee.std_logic_1164.all;
+
+entity ex4 is
+  port (
+    init : in  std_logic;
+    clk  : in  std_logic;
+    z1   : in  std_logic;
+    z2   : in  std_logic;
+    x1   : out std_logic);
+end entity ex4;
+
+architecture behavorial of ex4 is
+  type state is (a, b, c);
+  signal ps, ns : state := a;
+begin  -- architecture behavorial
+
+
+
+end architecture behavorial;

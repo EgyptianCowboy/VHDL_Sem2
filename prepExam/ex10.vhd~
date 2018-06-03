@@ -1,0 +1,27 @@
+library ieee;
+use ieee.numeric_std.all;
+use ieee.std_logic_1164.all;
+
+entity ex10 is
+  port (
+    x, clk, rst : in  std_logic;
+    y : out  std_logic_vector(2 downto 0);
+    z : out std_logic);
+end entity ex10;
+
+
+architecture behavorial of ex10 is
+  type states is (a, b, c);
+  attribute enum_type : string;
+  attribute enum_type of states : type is "001, 010, 100";
+  signal ps, ns : states := a;
+begin  -- architecture behavorial
+  --sequential part of the fsm
+  -- type   : sequential
+  -- inputs : clk, rst, ns
+  -- outputs: ps
+    end if;
+  end process;
+
+
+end architecture behavorial;
